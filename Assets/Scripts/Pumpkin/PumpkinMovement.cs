@@ -22,7 +22,9 @@ public class PumpkinMovement : MonoBehaviour
 
     public float rayDist; // the distance of the raycast for the collsion of pumpkins
 
-    
+    bool wPressed = false;
+
+
     void Start()
     {
         // setting variables
@@ -37,7 +39,6 @@ public class PumpkinMovement : MonoBehaviour
 
         if (isSelected)
         {
-            StartCoroutine(WaitForInput(isSelected));
             AbilityInput();
         }
     }
@@ -69,7 +70,10 @@ public class PumpkinMovement : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            isSelected = true; // the gameobject has been selected
+            if (!isSelected)
+                isSelected = true; // the gameobject has been selected
+            else
+                isSelected = false; // the gameobject has been deselected
         }
     }
 
@@ -81,45 +85,51 @@ public class PumpkinMovement : MonoBehaviour
 
     private void AbilityInput()
     {
-        if (Input.GetKeyDown(KeyCode.W))
-        {
-            StartCoroutine(WaitForInput(isSelected));
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                // up
-                CreatePumpkinGuide(new Vector2(0, 1));
-            }
-            else if (Input.GetKeyDown(KeyCode.A))
-            {
-                // left
-                
-            }
-            else if (Input.GetKeyDown(KeyCode.S))
-            {
-                // down
-                
-            }
-            else if (Input.GetKeyDown(KeyCode.D))
-            {
-                // right
-                
-            }
-            
-        }
-        else if (Input.GetKeyDown(KeyCode.A))
+
+        GuideAbilityInput();   
+        
+        //else if (Input.GetKeyDown(KeyCode.A))
         {
             // decoy pumkin
         }
-        else if (Input.GetKeyDown(KeyCode.S))
+       // else if (Input.GetKeyDown(KeyCode.S))
         {
             // ghost pumkin
         }
-        else if (Input.GetKeyDown(KeyCode.D))
+       // else if (Input.GetKeyDown(KeyCode.D))
         {
             // guide pumkin
         }
     }
 
+    private void GuideAbilityInput()
+    {
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            wPressed = true;
+        }
+
+        if (Input.GetKeyDown(KeyCode.W) && wPressed)
+        {
+            // up
+            CreatePumpkinGuide(new Vector2(0, 1));
+        }
+        else if (Input.GetKeyDown(KeyCode.A) && wPressed)
+        {
+            // left
+            CreatePumpkinGuide(new Vector2(-1, 0));
+        }
+        else if (Input.GetKeyDown(KeyCode.S) && wPressed)
+        {
+            // down
+            CreatePumpkinGuide(new Vector2(0, -1));
+        }
+        else if (Input.GetKeyDown(KeyCode.D) && wPressed)
+        {
+            // right
+            CreatePumpkinGuide(new Vector2(1, 0));
+        }
+    }
     private void CreatePumpkinGuide(Vector2 dir)
     {
         if (transform.position == targetPos.position)
@@ -135,5 +145,5 @@ public class PumpkinMovement : MonoBehaviour
         }
     }
 
-
+    
 }
