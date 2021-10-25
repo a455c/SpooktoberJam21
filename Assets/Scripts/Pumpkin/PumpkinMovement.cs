@@ -77,15 +77,8 @@ public class PumpkinMovement : MonoBehaviour
         }
     }
 
-    IEnumerator WaitForInput(bool bl)
-    {
-        yield return new WaitForSeconds(waitforinputDelay); // waits for a certain amount of time
-        bl = false;
-    }
-
     private void AbilityInput()
     {
-
         GuideAbilityInput();   
         
         //else if (Input.GetKeyDown(KeyCode.A))
