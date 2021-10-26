@@ -59,9 +59,16 @@ public class PumpkinMovement : MonoBehaviour
 
 
         LayerMask obstacleLayer = LayerMask.GetMask("Obstacles");
+        LayerMask destroyableLayer = LayerMask.GetMask("Destroyable");
+
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, rayDist, obstacleLayer); // casting a raycast to detect obstacles
+        RaycastHit2D hit1 = Physics2D.Raycast(transform.position, direction, rayDist, destroyableLayer);
 
         if (hit.collider != null)
+        {
+            direction = -direction; // sets the pumpkins direction to opposite
+        }
+        if (hit1.collider != null)
         {
             direction = -direction; // sets the pumpkins direction to opposite
         }

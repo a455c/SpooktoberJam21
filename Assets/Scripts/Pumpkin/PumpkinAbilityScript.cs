@@ -10,8 +10,10 @@ public class PumpkinAbilityScript : MonoBehaviour
 
     public void Explode()
     {
+        LayerMask destroyableLayer = LayerMask.GetMask("Destroyable");
+
         RaycastHit2D[] hit;
-        hit = Physics2D.CircleCastAll(transform.position, rayRadius, Vector2.up);
+        hit = Physics2D.CircleCastAll(transform.position, rayRadius, Vector2.up, 3f, destroyableLayer);
         if (hit.Length > 0)
         {
             foreach(RaycastHit2D i in hit)
@@ -20,5 +22,7 @@ public class PumpkinAbilityScript : MonoBehaviour
                 Destroy(i.collider.gameObject);
             }
         }
+
+        Destroy(gameObject);
     }
 }
