@@ -2053,7 +2053,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1751455419
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2430,26 +2430,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawner
       objectReference: {fileID: 0}
-    - target: {fileID: 7247435665737401743, guid: 99eeebb4c8caff648964117ae39dbd00,
-        type: 3}
-      propertyPath: PumpkinBasePrefab
-      value: 
-      objectReference: {fileID: 1751455418}
-    - target: {fileID: 7247435665737401743, guid: 99eeebb4c8caff648964117ae39dbd00,
-        type: 3}
-      propertyPath: SpawningPumpkinPrefab
-      value: 
-      objectReference: {fileID: 2060610080}
-    - target: {fileID: 7247435665737401743, guid: 99eeebb4c8caff648964117ae39dbd00,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7247435665737401743, guid: 99eeebb4c8caff648964117ae39dbd00,
-        type: 3}
-      propertyPath: timeDelay
-      value: 4
-      objectReference: {fileID: 0}
     - target: {fileID: 7247435665737401736, guid: 99eeebb4c8caff648964117ae39dbd00,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2504,6 +2484,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247435665737401743, guid: 99eeebb4c8caff648964117ae39dbd00,
+        type: 3}
+      propertyPath: PumpkinBasePrefab
+      value: 
+      objectReference: {fileID: 1751455418}
+    - target: {fileID: 7247435665737401743, guid: 99eeebb4c8caff648964117ae39dbd00,
+        type: 3}
+      propertyPath: SpawningPumpkinPrefab
+      value: 
+      objectReference: {fileID: 2060610080}
+    - target: {fileID: 7247435665737401743, guid: 99eeebb4c8caff648964117ae39dbd00,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7247435665737401743, guid: 99eeebb4c8caff648964117ae39dbd00,
+        type: 3}
+      propertyPath: timeDelay
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 99eeebb4c8caff648964117ae39dbd00, type: 3}
