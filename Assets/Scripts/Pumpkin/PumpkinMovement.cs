@@ -9,6 +9,7 @@ public class PumpkinMovement : MonoBehaviour
 
 
     public GameObject PumpkinGuidePrefab;
+    public GameObject PumpkinExplodePrefab;
 
     public float moveSpeed; // how fast pumpkin will reach the target position
 
@@ -81,20 +82,36 @@ public class PumpkinMovement : MonoBehaviour
     {
         GuideAbilityInput();   
         
-        //else if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            CreateAbilityPumpkin("explode", PumpkinExplodePrefab);
+        }
+       /* else if (Input.GetKeyDown(KeyCode.D))
         {
             // decoy pumkin
         }
-       // else if (Input.GetKeyDown(KeyCode.S))
+        else if (Input.GetKeyDown(KeyCode.D))
         {
-            // ghost pumkin
-        }
-       // else if (Input.GetKeyDown(KeyCode.D))
-        {
-            // guide pumkin
-        }
+           
+        }*/
     }
 
+    private void CreateAbilityPumpkin(string str, GameObject prefab)
+    {
+        if (transform.position == targetPos.position && !wPressed)
+        {
+            GameObject pumpkinAbility = Instantiate(prefab, gameObject.transform.position, Quaternion.identity);
+            pumpkinAbility.SetActive(true);
+            PumpkinAbilityScript pumpkinAbilityScript = pumpkinAbility.GetComponent<PumpkinAbilityScript>();
+
+            if (str == "explode")
+                pumpkinAbilityScript.Explode();
+
+
+            Destroy(gameObject);
+            Destroy(targetPos.gameObject);
+        }
+    }
     private void GuideAbilityInput()
     {
         if (Input.GetKeyUp(KeyCode.W))
@@ -105,17 +122,17 @@ public class PumpkinMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.W) && wPressed)
         {
             // up
-            CreatePumpkinGuide(new Vector2(0, 1));
+            CreatePumpkinGuide(new Vector2(0, 1));        
         }
         else if (Input.GetKeyDown(KeyCode.A) && wPressed)
         {
             // left
-            CreatePumpkinGuide(new Vector2(-1, 0));
+            CreatePumpkinGuide(new Vector2(-1, 0));           
         }
         else if (Input.GetKeyDown(KeyCode.S) && wPressed)
         {
             // down
-            CreatePumpkinGuide(new Vector2(0, -1));
+            CreatePumpkinGuide(new Vector2(0, -1));          
         }
         else if (Input.GetKeyDown(KeyCode.D) && wPressed)
         {
@@ -135,6 +152,7 @@ public class PumpkinMovement : MonoBehaviour
 
             Destroy(gameObject);
             Destroy(targetPos.gameObject);
+            wPressed = false;
         }
     }
 
