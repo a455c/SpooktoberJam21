@@ -25,6 +25,8 @@ public class PumpkinMovement : MonoBehaviour
 
     bool wPressed = false;
 
+    public Animator animator;
+
 
     void Start()
     {
@@ -56,6 +58,15 @@ public class PumpkinMovement : MonoBehaviour
             targetPos.position += direction;
             lastDelay = Time.time;
         }
+
+        if (direction == new Vector3(1,0))
+        {
+            animator.SetBool("moving_right", true);
+        }
+        //else if (direction == new Vector3(0, 0))
+        //{
+        //    animator.SetBool("moving_right", false);
+        //}
 
 
         LayerMask obstacleLayer = LayerMask.GetMask("Obstacles");
