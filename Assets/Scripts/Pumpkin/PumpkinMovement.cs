@@ -5,10 +5,10 @@ using UnityEngine;
 public class PumpkinMovement : MonoBehaviour
 {
     public Transform targetPos; // position pumpkin will move towards
-    public Vector3 direction; // direction rthe current pumpkin is going
+    public Vector3 direction; // direction the current pumpkin is going
+    public PumpkinCounterScript pumpkinCounter; // reference to the pumpkin counter script
 
-
-    public GameObject PumpkinGuidePrefab;
+    public GameObject PumpkinGuidePrefab; // reference to the prefab so we can clone the gameobject
     public GameObject PumpkinExplodePrefab;
 
     public float moveSpeed; // how fast pumpkin will reach the target position
@@ -19,12 +19,9 @@ public class PumpkinMovement : MonoBehaviour
     float lastDelay; // the last marked delay of the pumpkins movement
     public float delayTime; // how quickly the target position will move to the next destination
 
-    public int waitforinputDelay; // how long to wait for a selected pumpkins input
-
     public float rayDist; // the distance of the raycast for the collsion of pumpkins
 
-    bool wPressed = false;
-
+    bool wPressed = false; // has w been pressed?
 
     void Start()
     {
@@ -36,6 +33,7 @@ public class PumpkinMovement : MonoBehaviour
 
     void Update()
     {
+        // playing functions
         PumpkinMove();
 
         if (isSelected)
@@ -58,12 +56,15 @@ public class PumpkinMovement : MonoBehaviour
         }
 
 
+        // layermask to only raycast to
         LayerMask obstacleLayer = LayerMask.GetMask("Obstacles");
         LayerMask destroyableLayer = LayerMask.GetMask("Destroyable");
 
+        // raycasting
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, rayDist, obstacleLayer); // casting a raycast to detect obstacles
         RaycastHit2D hit1 = Physics2D.Raycast(transform.position, direction, rayDist, destroyableLayer);
 
+        // does the raycast hit
         if (hit.collider != null)
         {
             direction = -direction; // sets the pumpkins direction to opposite
@@ -72,10 +73,18 @@ public class PumpkinMovement : MonoBehaviour
         {
             direction = -direction; // sets the pumpkins direction to opposite
         }
+
+
+        if (pumpkinCounter.isDead)
+        {
+            Destroy(gameObject);
+            Destroy(targetPos.gameObject);
+        }
     }
     
     private void OnMouseOver()
     {
+        // left click
         if (Input.GetMouseButtonDown(0))
         {
             if (!isSelected)
@@ -87,20 +96,15 @@ public class PumpkinMovement : MonoBehaviour
 
     private void AbilityInput()
     {
+        // guide pumpkin
         GuideAbilityInput();   
         
-        if (Input.GetKeyUp(KeyCode.A))
+        // explode pumpkin
+        if (Input.GetKeyUp(KeyCode.A) && !pumpkinCounter.maxExplode)
         {
             CreateAbilityPumpkin("explode", PumpkinExplodePrefab);
+            pumpkinCounter.maxExplodeAbility -= 1;
         }
-       /* else if (Input.GetKeyDown(KeyCode.D))
-        {
-            // decoy pumkin
-        }
-        else if (Input.GetKeyDown(KeyCode.D))
-        {
-           
-        }*/
     }
 
     private void CreateAbilityPumpkin(string str, GameObject prefab)
@@ -121,7 +125,7 @@ public class PumpkinMovement : MonoBehaviour
     }
     private void GuideAbilityInput()
     {
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyUp(KeyCode.W) && !pumpkinCounter.maxGuide)
         {
             wPressed = true;
         }
@@ -160,6 +164,7 @@ public class PumpkinMovement : MonoBehaviour
             Destroy(gameObject);
             Destroy(targetPos.gameObject);
             wPressed = false;
+            pumpkinCounter.maxGuideAbility -= 1;
         }
     }
 

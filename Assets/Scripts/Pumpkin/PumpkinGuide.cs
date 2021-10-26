@@ -10,6 +10,7 @@ public class PumpkinGuide : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
+            // setting the pupkins to the new direction
             PumpkinMovement pumpkinMovement = collision.gameObject.GetComponent<PumpkinMovement>();
             pumpkinMovement.direction = guideDirection;
         }

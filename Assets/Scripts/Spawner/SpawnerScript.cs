@@ -8,6 +8,8 @@ public class SpawnerScript : MonoBehaviour
     public GameObject PumpkinBasePrefab;
     public GameObject SpawningPumpkinPrefab;
 
+    public PumpkinCounterScript pumpkinCounter;
+
     public Transform SpawnTargetPos;
     public Transform SpawnPos;
 
@@ -40,7 +42,7 @@ public class SpawnerScript : MonoBehaviour
             }
         }
               
-        if (Time.time >= lastDelay + timeDelay)
+        if (Time.time >= lastDelay + timeDelay && !pumpkinCounter.isDead)
         {
             clone = Instantiate(SpawningPumpkinPrefab, SpawnPos.position, Quaternion.identity);
             clone.SetActive(true);
