@@ -52,6 +52,21 @@ public class PumpkinMovement : MonoBehaviour
         if (direction == new Vector3(1, 0) || direction == new Vector3(-1, 0))
         {
             transform.right = targetPos.position - transform.position;
+            animator.SetBool("moving_right", true);
+            animator.SetBool("moving_up", false);
+            animator.SetBool("moving_down", false);
+        }
+        else if (direction == new Vector3(0,1))
+        {
+            animator.SetBool("moving_right", false);
+            animator.SetBool("moving_up", true);
+            animator.SetBool("moving_down", false);
+        }
+        else if (direction == new Vector3(0, -1))
+        {
+            animator.SetBool("moving_right", false);
+            animator.SetBool("moving_up", false);
+            animator.SetBool("moving_down", true);
         }
 
         // when will the target position move towards the next increment
@@ -60,7 +75,6 @@ public class PumpkinMovement : MonoBehaviour
             // how far the next increment is eg: 1 jump
             targetPos.position += direction;
             lastDelay = Time.time;
-            animator.SetBool("moving_right", true);
         }
         // layermask to only raycast to
         LayerMask obstacleLayer = LayerMask.GetMask("Obstacles");

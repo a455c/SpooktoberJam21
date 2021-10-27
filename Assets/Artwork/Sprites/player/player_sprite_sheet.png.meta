@@ -58,22 +58,22 @@ TextureImporter:
     second: player_sprite_sheet_17
   - first:
       213: -8366577903342990282
-    second: player_sprite_sheet_18
+    second: player_move_u_0
   - first:
       213: 8702911770795418620
-    second: player_sprite_sheet_19
+    second: player_move_u_1
   - first:
       213: 8793469500076740571
-    second: player_sprite_sheet_20
+    second: player_move_u_2
   - first:
       213: -5428022847822481243
-    second: player_sprite_sheet_21
+    second: player__move_u_3
   - first:
       213: 4994854519657634469
-    second: player_sprite_sheet_22
+    second: player_move_u_4
   - first:
       213: 1831255732078855339
-    second: player_sprite_sheet_23
+    second: player_move_u_5
   - first:
       213: -3413181812202779254
     second: player_sprite_sheet_24
@@ -560,7 +560,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_sprite_sheet_18
+      name: player_move_u_0
       rect:
         serializedVersion: 2
         x: 30
@@ -581,7 +581,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_sprite_sheet_19
+      name: player_move_u_1
       rect:
         serializedVersion: 2
         x: 91
@@ -602,7 +602,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_sprite_sheet_20
+      name: player_move_u_2
       rect:
         serializedVersion: 2
         x: 155
@@ -623,13 +623,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_sprite_sheet_21
+      name: player__move_u_3
       rect:
         serializedVersion: 2
-        x: 213
-        y: 46
-        width: 33
-        height: 39
+        x: 209
+        y: 35
+        width: 40
+        height: 50
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -644,7 +644,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_sprite_sheet_22
+      name: player_move_u_4
       rect:
         serializedVersion: 2
         x: 268
@@ -665,7 +665,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player_sprite_sheet_23
+      name: player_move_u_5
       rect:
         serializedVersion: 2
         x: 329
