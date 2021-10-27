@@ -23,6 +23,9 @@ public class PumpkinMovement : MonoBehaviour
 
     bool wPressed = false;
 
+    bool rightRotated = true;
+    bool leftRotated = false;
+
     public Animator animator;
 
     void Start()
@@ -49,9 +52,18 @@ public class PumpkinMovement : MonoBehaviour
     {
         // the pumpkin will make its way towards the target position
         transform.position = Vector2.MoveTowards(transform.position, targetPos.position, moveSpeed * Time.deltaTime);
-        if (direction == new Vector3(1, 0) || direction == new Vector3(-1, 0))
+
+        if (direction == new Vector3(1, 0) && !rightRotated)
         {
-            transform.right = targetPos.position - transform.position;
+            transform.Rotate(0f, 180f, 0f, Space.Self);
+            rightRotated = true;
+            leftRotated = false;
+        }
+        else if (direction == new Vector3(-1, 0) && !leftRotated)
+        {
+            transform.Rotate(0f, 180f, 0f, Space.Self);
+            leftRotated = true;
+            rightRotated = false;
         }
 
         // when will the target position move towards the next increment
@@ -60,7 +72,6 @@ public class PumpkinMovement : MonoBehaviour
             // how far the next increment is eg: 1 jump
             targetPos.position += direction;
             lastDelay = Time.time;
-            animator.SetBool("moving_right", true);
         }
         // layermask to only raycast to
         LayerMask obstacleLayer = LayerMask.GetMask("Obstacles");
