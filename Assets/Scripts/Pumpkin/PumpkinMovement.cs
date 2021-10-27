@@ -25,6 +25,7 @@ public class PumpkinMovement : MonoBehaviour
 
     public Animator animator;
 
+    Vector3 lastPosition;
 
     void Start()
     {
@@ -32,6 +33,8 @@ public class PumpkinMovement : MonoBehaviour
         direction = new Vector2(1, 0);
         targetPos.parent = null;
         lastDelay = Time.time;
+        lastPosition = transform.position;
+        animator.SetBool("moving_right", true);
     }
 
     void Update()
@@ -49,6 +52,8 @@ public class PumpkinMovement : MonoBehaviour
     {
         // the pumpkin will make its way towards the target position
         transform.position = Vector2.MoveTowards(transform.position, targetPos.position, moveSpeed * Time.deltaTime);
+        if (direction == new Vector3(1,0) || direction == new Vector3(-1, 0))
+            transform.right = targetPos.position - transform.position;
 
         // when will the target position move towards the next increment
         if (Vector3.Distance(transform.position, targetPos.position) <= .05f && Time.time >= lastDelay + delayTime && !isSelected)
@@ -56,18 +61,9 @@ public class PumpkinMovement : MonoBehaviour
             // how far the next increment is eg: 1 jump
             targetPos.position += direction;
             lastDelay = Time.time;
-        }
-
-        if (direction == new Vector3(1,0))
-        {
             animator.SetBool("moving_right", true);
+            lastPosition = transform.position;
         }
-        //else if (direction == new Vector3(0, 0))
-        //{
-        //    animator.SetBool("moving_right", false);
-        //}
-
-
         // layermask to only raycast to
         LayerMask obstacleLayer = LayerMask.GetMask("Obstacles");
         LayerMask destroyableLayer = LayerMask.GetMask("Destroyable");
@@ -97,12 +93,18 @@ public class PumpkinMovement : MonoBehaviour
     private void OnMouseOver()
     {
         // left click
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && !pumpkinCounter.onePumpkinSelected)
         {
             if (!isSelected)
+            {
                 isSelected = true; // the gameobject has been selected
-            else
-                isSelected = false; // the gameobject has been deselected
+                pumpkinCounter.onePumpkinSelected = true;
+            }
+        }
+        else if (Input.GetMouseButtonDown(0) && isSelected)
+        {
+            isSelected = false;
+            pumpkinCounter.onePumpkinSelected = false;
         }
     }
 
@@ -133,6 +135,8 @@ public class PumpkinMovement : MonoBehaviour
 
             Destroy(gameObject);
             Destroy(targetPos.gameObject);
+            pumpkinCounter.onePumpkinSelected = false;
+            isSelected = false;
         }
     }
     private void GuideAbilityInput()
@@ -176,6 +180,8 @@ public class PumpkinMovement : MonoBehaviour
             Destroy(gameObject);
             Destroy(targetPos.gameObject);
             wPressed = false;
+            isSelected = false;
+            pumpkinCounter.onePumpkinSelected = false;
             pumpkinCounter.maxGuideAbility -= 1;
         }
     }

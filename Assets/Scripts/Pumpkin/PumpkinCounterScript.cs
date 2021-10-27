@@ -19,6 +19,8 @@ public class PumpkinCounterScript : MonoBehaviour
     public float maxCompleted;
     public float currentCompleted;
 
+    public bool onePumpkinSelected = false;
+
     private void Start()
     {
         lastTime = Time.time;
@@ -44,7 +46,10 @@ public class PumpkinCounterScript : MonoBehaviour
             currentTime = Mathf.Abs(System.Convert.ToInt64(Time.time - timerDeathDelay));
 
         if (maxCompleted <= currentCompleted)
-            print("completed");
+        {
+
+        }
+            
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
