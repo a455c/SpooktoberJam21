@@ -25,15 +25,12 @@ public class PumpkinMovement : MonoBehaviour
 
     public Animator animator;
 
-    Vector3 lastPosition;
-
     void Start()
     {
         // setting variables
         direction = new Vector2(1, 0);
         targetPos.parent = null;
         lastDelay = Time.time;
-        lastPosition = transform.position;
         animator.SetBool("moving_right", true);
     }
 
@@ -52,8 +49,10 @@ public class PumpkinMovement : MonoBehaviour
     {
         // the pumpkin will make its way towards the target position
         transform.position = Vector2.MoveTowards(transform.position, targetPos.position, moveSpeed * Time.deltaTime);
-        if (direction == new Vector3(1,0) || direction == new Vector3(-1, 0))
+        if (direction == new Vector3(1, 0) || direction == new Vector3(-1, 0))
+        {
             transform.right = targetPos.position - transform.position;
+        }
 
         // when will the target position move towards the next increment
         if (Vector3.Distance(transform.position, targetPos.position) <= .05f && Time.time >= lastDelay + delayTime && !isSelected)
@@ -62,7 +61,6 @@ public class PumpkinMovement : MonoBehaviour
             targetPos.position += direction;
             lastDelay = Time.time;
             animator.SetBool("moving_right", true);
-            lastPosition = transform.position;
         }
         // layermask to only raycast to
         LayerMask obstacleLayer = LayerMask.GetMask("Obstacles");
@@ -117,6 +115,8 @@ public class PumpkinMovement : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.A) && !pumpkinCounter.maxExplode)
         {
             CreateAbilityPumpkin("explode", PumpkinExplodePrefab);
+            StartCoroutine(WaitToExplode(gameObject));
+            StartCoroutine(WaitToExplode(targetPos.gameObject));
             pumpkinCounter.maxExplodeAbility -= 1;
         }
     }
@@ -186,5 +186,9 @@ public class PumpkinMovement : MonoBehaviour
         }
     }
 
-
+    private IEnumerator WaitToExplode(GameObject gmj)
+    {
+        yield return new WaitForSeconds(1);
+        Destroy(gmj);
+    }
 }

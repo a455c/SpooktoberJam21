@@ -8,6 +8,8 @@ public class PumpkinAbilityScript : MonoBehaviour
     public float rayRadius;
     public float destroyDelay;
 
+    public bool isExploded = false;
+
     public void Explode()
     {
         LayerMask destroyableLayer = LayerMask.GetMask("Destroyable");
@@ -23,6 +25,8 @@ public class PumpkinAbilityScript : MonoBehaviour
             }
         }
 
-        Destroy(gameObject);
+        isExploded = true;
     }
 }
+
+

@@ -13,6 +13,8 @@ public class UIController : MonoBehaviour
     public TMP_Text timerCounterText;
 
     public Slider completedCounterSlider;
+    public Image sliderFill;
+
     public Color colourGreen;
     public Color colourYellow;
     public Color colourRed;
@@ -47,6 +49,21 @@ public class UIController : MonoBehaviour
         {
             timerCounterText.color = colourRed;
         }
+
+        if(pumpkinCounter.currentCompleted > 3)
+        {
+            sliderFill.color = colourGreen;
+        }
+        else if (pumpkinCounter.currentCompleted > 2)
+        {
+            sliderFill.color = colourYellow;
+        }
+        else if (pumpkinCounter.currentCompleted > 0)
+        {
+            sliderFill.color = colourRed;
+        }
+
+
         completedCounterSlider.value = pumpkinCounter.currentCompleted;
     }
 }
