@@ -9,7 +9,6 @@ public class PumpkinGuide : MonoBehaviour
     public GuidePumpkinParticles guideParticles;
     bool particlePlayed = false;
 
-
     private void Update()
     {
         if (!particlePlayed)
@@ -24,8 +23,14 @@ public class PumpkinGuide : MonoBehaviour
         if (collision.tag == "Player")
         {
             // setting the pupkins to the new direction
-            PumpkinMovement pumpkinMovement = collision.gameObject.GetComponent<PumpkinMovement>();
-            pumpkinMovement.direction = guideDirection;
+            PumpkinMovement pumpkinMovement;
+            pumpkinMovement = collision.gameObject.GetComponent<PumpkinMovement>();
+            IEnumerator WaitToGuide()
+            {
+                yield return new WaitForSeconds(0.5f);
+                pumpkinMovement.direction = guideDirection;
+            }
+            StartCoroutine(WaitToGuide());
 
             if (!guideParticles.guideActiveParticle.isPlaying)
             {
@@ -34,4 +39,6 @@ public class PumpkinGuide : MonoBehaviour
         }
        
     }
+
+    
 }
