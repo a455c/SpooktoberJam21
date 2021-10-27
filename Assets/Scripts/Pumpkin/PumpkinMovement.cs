@@ -21,6 +21,9 @@ public class PumpkinMovement : MonoBehaviour
 
     public float rayDist; // the distance of the raycast for the collsion of pumpkins
 
+    public Color selectedGreen;
+    Color basicColour;
+
     bool wPressed = false;
 
     bool rightRotated = true;
@@ -36,6 +39,7 @@ public class PumpkinMovement : MonoBehaviour
         targetPos.parent = null;
         lastDelay = Time.time;
         animator.SetBool("moving_right", true);
+        basicColour = spriteRenderer.color;
     }
 
     void Update()
@@ -123,12 +127,14 @@ public class PumpkinMovement : MonoBehaviour
             {
                 isSelected = true; // the gameobject has been selected
                 pumpkinCounter.onePumpkinSelected = true;
+                spriteRenderer.color = selectedGreen;
             }
         }
         else if (Input.GetMouseButtonDown(0) && isSelected)
         {
             isSelected = false;
             pumpkinCounter.onePumpkinSelected = false;
+            spriteRenderer.color = basicColour;
         }
     }
 

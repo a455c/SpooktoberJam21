@@ -9,6 +9,8 @@ public class PumpkinGuide : MonoBehaviour
     public GuidePumpkinParticles guideParticles;
     bool particlePlayed = false;
 
+    public GameObject spriteGameobject;
+
     private void Update()
     {
         if (!particlePlayed)
@@ -16,6 +18,8 @@ public class PumpkinGuide : MonoBehaviour
             guideParticles.guideAbilityParticle.Play();
             particlePlayed = true;
         }
+       
+        transform.up = new Vector3(transform.position.x + guideDirection.x, transform.position.y + guideDirection.y) - transform.position;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
