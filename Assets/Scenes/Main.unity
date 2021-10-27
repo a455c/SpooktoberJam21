@@ -12825,6 +12825,7 @@ MonoBehaviour:
   delayTime: 1
   rayDist: 0.5
   animator: {fileID: 510876444}
+  spriteRenderer: {fileID: 510876445}
 --- !u!1 &1826252966
 GameObject:
   m_ObjectHideFlags: 0

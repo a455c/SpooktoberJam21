@@ -27,6 +27,7 @@ public class PumpkinMovement : MonoBehaviour
     bool leftRotated = false;
 
     public Animator animator;
+    public SpriteRenderer spriteRenderer;
 
     void Start()
     {
@@ -53,23 +54,19 @@ public class PumpkinMovement : MonoBehaviour
         // the pumpkin will make its way towards the target position
         transform.position = Vector2.MoveTowards(transform.position, targetPos.position, moveSpeed * Time.deltaTime);
 
-        if (direction == new Vector3(1, 0) && !rightRotated)
+        if (direction == new Vector3(1, 0))
         {
-            transform.Rotate(0f, 180f, 0f, Space.Self);
-            rightRotated = true;
-            leftRotated = false;
             animator.SetBool("moving_right", true);
             animator.SetBool("moving_up", false);
             animator.SetBool("moving_down", false);
+            spriteRenderer.flipX = false;
         }
-        else if (direction == new Vector3(-1, 0) && !leftRotated)
+        else if (direction == new Vector3(-1, 0))
         {
-            transform.Rotate(0f, 180f, 0f, Space.Self);
-            leftRotated = true;
-            rightRotated = false;
             animator.SetBool("moving_right", true);
             animator.SetBool("moving_up", false);
             animator.SetBool("moving_down", false);
+            spriteRenderer.flipX = true;
         }
         else if (direction == new Vector3(0,1))
         {
@@ -77,7 +74,7 @@ public class PumpkinMovement : MonoBehaviour
             animator.SetBool("moving_up", true);
             animator.SetBool("moving_down", false);
         }
-        else if (direction == new Vector3(0, -1))
+        else if (direction == new Vector3(0,-1))
         {
             animator.SetBool("moving_right", false);
             animator.SetBool("moving_up", false);
