@@ -21,6 +21,8 @@ public class PumpkinCounterScript : MonoBehaviour
 
     public bool onePumpkinSelected = false;
 
+    public LevelLoader levelLoader;
+
     private void Start()
     {
         Time.timeScale = 1;
@@ -46,9 +48,9 @@ public class PumpkinCounterScript : MonoBehaviour
         if(!isDead)
             currentTime = Mathf.Abs(System.Convert.ToInt64(Time.time - timerDeathDelay));
 
-        if (maxCompleted <= currentCompleted)
+        if (maxCompleted <= currentCompleted || isDead)
         {
-
+            levelLoader.LoadScene(0, "End");
         }
             
     }
