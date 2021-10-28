@@ -27,6 +27,8 @@ public class PumpkinCounterScript : MonoBehaviour
     {
         Time.timeScale = 1;
         lastTime = Time.time;
+        timerDeathDelay = 60;
+        currentTime = timerDeathDelay;
     }
 
     void Update()
