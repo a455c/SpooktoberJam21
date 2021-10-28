@@ -23,6 +23,7 @@ public class PumpkinCounterScript : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
         lastTime = Time.time;
     }
 

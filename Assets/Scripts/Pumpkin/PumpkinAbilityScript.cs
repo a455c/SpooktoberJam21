@@ -24,7 +24,14 @@ public class PumpkinAbilityScript : MonoBehaviour
                 Destroy(i.collider.gameObject);
             }
         }
+        IEnumerator WaitToDestroy()
+        {
+            yield return new WaitForSeconds(0.75f);
+            Destroy(gameObject);
+        }
 
+
+        StartCoroutine(WaitToDestroy());
         isExploded = true;
     }
 }
