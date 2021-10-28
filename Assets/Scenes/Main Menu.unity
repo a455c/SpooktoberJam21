@@ -850,7 +850,7 @@ GameObject:
   - component: {fileID: 334863125}
   - component: {fileID: 334863124}
   m_Layer: 5
-  m_Name: Sample Level Text
+  m_Name: Level 1 Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -895,7 +895,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'sample level
+  m_text: 'Level 1
 
 '
   m_isRightToLeft: 0
@@ -966,12 +966,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 334863124}
-    characterCount: 13
+    characterCount: 8
     spriteCount: 0
     spaceCount: 2
     wordCount: 2
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -1817,7 +1817,7 @@ GameObject:
   - component: {fileID: 1084353594}
   - component: {fileID: 1084353593}
   m_Layer: 5
-  m_Name: Sample Level Button
+  m_Name: Level 1 Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
