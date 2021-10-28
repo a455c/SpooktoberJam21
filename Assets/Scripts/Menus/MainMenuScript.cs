@@ -8,7 +8,6 @@ public class MainMenuScript : MonoBehaviour
 
     public GameObject levelSelectMenu;
 
-
     public void Start()
     {
         Time.timeScale = 0;
