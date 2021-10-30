@@ -23,6 +23,11 @@ public class PumpkinCounterScript : MonoBehaviour
 
     public LevelLoader levelLoader;
 
+    public AudioSource reachedHideaway;
+    public AudioSource endLevel;
+
+    public bool endLevelSfxPlayed = false;
+
     private void Start()
     {
         Time.timeScale = 1;
@@ -50,9 +55,19 @@ public class PumpkinCounterScript : MonoBehaviour
         if(!isDead)
             currentTime = Mathf.Abs(System.Convert.ToInt64(Time.time - timerDeathDelay));
 
-        if (maxCompleted <= currentCompleted || isDead)
+        if (maxCompleted <= currentCompleted || isDead )
         {
-            levelLoader.LoadScene(0, "End");
+            if (!endLevel.isPlaying)
+            {
+                if (!endLevelSfxPlayed)
+                {
+                    endLevel.Play();
+                    endLevelSfxPlayed = true;
+                }
+
+                levelLoader.LoadScene(0, "End");
+            }
+            
         }
             
     }
@@ -64,7 +79,8 @@ public class PumpkinCounterScript : MonoBehaviour
             currentCompleted += 1;
             PumpkinMovement pumMove = collision.gameObject.GetComponent<PumpkinMovement>();
             Destroy(pumMove.targetPos.gameObject);
-            Destroy(collision.gameObject);      
+            Destroy(collision.gameObject);
+            reachedHideaway.Play();
         }
     }
 }
