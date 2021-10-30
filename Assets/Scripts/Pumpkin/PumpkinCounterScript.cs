@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PumpkinCounterScript : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class PumpkinCounterScript : MonoBehaviour
     public float timerDeathDelay;
     private float lastTime;
     public float currentTime;
+    private float time;
 
     public bool isDead = false;
 
@@ -26,14 +28,17 @@ public class PumpkinCounterScript : MonoBehaviour
     private void Start()
     {
         Time.timeScale = 1;
-        lastTime = Time.time;
+        time = Time.timeSinceLevelLoad;
+        lastTime = time;
         timerDeathDelay = 60;
-        currentTime = timerDeathDelay;
     }
 
     void Update()
     {
-        if(maxGuideAbility < 1)
+        time = Time.timeSinceLevelLoad;
+
+
+        if (maxGuideAbility < 1)
         {
             maxGuide = true;
         }
@@ -42,17 +47,26 @@ public class PumpkinCounterScript : MonoBehaviour
             maxExplode = true;
         }
 
-        if (Time.time >= lastTime + timerDeathDelay)
+        if (time >= lastTime + timerDeathDelay)
         {
             isDead = true;
+            levelLoader.LoadScene(0, "End");
         }
 
         if(!isDead)
-            currentTime = Mathf.Abs(System.Convert.ToInt64(Time.time - timerDeathDelay));
+            currentTime = Mathf.Abs(System.Convert.ToInt64(time - timerDeathDelay));
 
-        if (maxCompleted <= currentCompleted || isDead)
+        if (SceneManager.GetActiveScene().buildIndex != 6)
         {
-            levelLoader.LoadScene(0, "End");
+            if (maxCompleted <= currentCompleted)
+            {
+                levelLoader.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, "End");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
             
     }
