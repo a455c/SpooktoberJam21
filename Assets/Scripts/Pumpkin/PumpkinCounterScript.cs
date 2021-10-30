@@ -27,8 +27,10 @@ public class PumpkinCounterScript : MonoBehaviour
 
     public AudioSource reachedHideaway;
     public AudioSource endLevel;
+    public AudioSource gameOver;
 
     public bool endLevelSfxPlayed = false;
+    public bool gameOverSfxPlayed = false;
 
     private void Start()
     {
@@ -54,6 +56,14 @@ public class PumpkinCounterScript : MonoBehaviour
 
         if (time >= lastTime + timerDeathDelay)
         {
+            if (!gameOver.isPlaying)
+            {
+                if (!gameOverSfxPlayed)
+                {
+                    gameOver.Play();
+                    gameOverSfxPlayed = true;
+                }
+            }
             isDead = true;
             levelLoader.LoadScene(0, "End");
         }
