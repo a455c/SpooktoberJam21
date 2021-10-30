@@ -72,25 +72,30 @@ public class PumpkinCounterScript : MonoBehaviour
         if(!isDead)
             currentTime = Mathf.Abs(System.Convert.ToInt64(time - timerDeathDelay));
 
-        if (SceneManager.GetActiveScene().buildIndex != 6)
+        if (SceneManager.GetActiveScene().buildIndex != 5 && maxCompleted <= currentCompleted)
         {
-            if (maxCompleted <= currentCompleted)
+            if (!endLevel.isPlaying)
             {
-                if (!endLevel.isPlaying)
+                if (!endLevelSfxPlayed)
                 {
-                    if (!endLevelSfxPlayed)
-                    {
-                        endLevel.Play();
-                        endLevelSfxPlayed = true;
-                    }
+                    endLevel.Play();
+                    endLevelSfxPlayed = true;
                 }
-                levelLoader.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, "End");
-                isWon = true;
             }
+            levelLoader.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, "End");
+            isWon = true;
         }
-        else
+        else if (maxCompleted <= currentCompleted)
         {
             levelLoader.LoadScene(0, "End");
+            if (!endLevel.isPlaying)
+            {
+                if (!endLevelSfxPlayed)
+                {
+                    endLevel.Play();
+                    endLevelSfxPlayed = true;
+                }
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.R))
