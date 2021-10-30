@@ -17,6 +17,7 @@ public class PumpkinCounterScript : MonoBehaviour
     private float time;
 
     public bool isDead = false;
+    public bool isWon = false;
 
     public float maxCompleted;
     public float currentCompleted;
@@ -84,8 +85,12 @@ public class PumpkinCounterScript : MonoBehaviour
                     }
                 }
                 levelLoader.LoadScene(SceneManager.GetActiveScene().buildIndex + 1, "End");
-
+                isWon = true;
             }
+        }
+        else
+        {
+            levelLoader.LoadScene(0, "End");
         }
 
         if (Input.GetKeyDown(KeyCode.R))

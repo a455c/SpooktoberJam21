@@ -42,7 +42,7 @@ public class SpawnerScript : MonoBehaviour
             }
         }
               
-        if (Time.time >= lastDelay + timeDelay && !pumpkinCounter.isDead)
+        if (Time.time >= lastDelay + timeDelay && !pumpkinCounter.isDead && !pumpkinCounter.isWon)
         {
             clone = Instantiate(SpawningPumpkinPrefab, SpawnPos.position, Quaternion.identity);
             clone.SetActive(true);

@@ -111,7 +111,7 @@ public class PumpkinMovement : MonoBehaviour
         }
 
 
-        if (pumpkinCounter.isDead)
+        if (pumpkinCounter.isDead || pumpkinCounter.isWon)
         {
             Destroy(gameObject);
             Destroy(targetPos.gameObject);
